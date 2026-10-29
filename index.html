@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kavilumpara Grama Panchayat WebGIS, Kozhikode, Kerala">
+<title>Kavilumpara Grama Panchayat | WebGIS</title>
+
+<style>
+:root {
+  --green: #174d3a;
+  --dark: #10372c;
+  --light: #edf4e9;
+  --cream: #f8f8f2;
+  --text: #24342d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* Navigation */
+header {
+  background: var(--dark);
+  color: white;
+  padding: 16px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo span {
+  display: block;
+  font-size: 11px;
+  color: #c8e2c4;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #bce3a9;
+}
+
+/* Hero section */
+.hero {
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  padding: 70px 8%;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(8, 40, 28, .9),
+    rgba(8, 40, 28, .25)),
+    url("https://images.bhaskarassets.com/thumb/1200x900/web2images/521/2021/10/06/untitled-11_1633482423.jpg")
+    center/cover;
+}
+
+.hero-content {
+  max-width: 760px;
+}
+
+.hero .tag {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #d4edc7;
+  font-size: 13px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 70px);
+  line-height: 1.12;
+  margin: 20px 0;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.button {
+  display: inline-block;
+  background: #d9edce;
+  color: var(--dark);
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 5px 5px 5px 0;
+}
+
+.button:hover {
+  background: white;
+}
+
+/* Main content */
+.container {
+  width: 88%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+section {
+  padding: 65px 0;
+  scroll-margin-top: 25px;
+}
+
+.section-title {
+  margin-bottom: 25px;
+}
+
+.section-title span {
+  color: #518153;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+h2 {
+  color: var(--green);
+  font-size: clamp(27px, 4vw, 40px);
+  margin: 8px 0 15px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+/* Overview cards */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: -35px;
+  position: relative;
+}
+
+.overview-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.09);
+  text-align: center;
+}
+
+.overview-card h3 {
+  color: var(--green);
+  font-size: 17px;
+}
+
+/* Introduction */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.intro-image {
+  width: 100%;
+  height: 370px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Geography */
+.geography {
+  background: var(--light);
+}
+
+.geo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.geo-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border-bottom: 4px solid #76a66d;
+}
+
+.geo-card .icon {
+  font-size: 30px;
+}
+
+.geo-card h3 {
+  color: var(--green);
+  margin: 10px 0;
+}
+
+.geo-card p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.note {
+  margin-top: 22px;
+  padding: 18px;
+  background: #e1eddb;
+  border-left: 4px solid #65965a;
+  font-size: 14px;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.gallery figure {
+  position: relative;
+  height: 270px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #dce7d7;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+
+.gallery figure:hover img {
+  transform: scale(1.05);
+}
+
+.gallery figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  padding: 35px 18px 15px;
+  background: linear-gradient(transparent, rgba(0,0,0,.8));
+  font-weight: bold;
+}
+
+/* Interactive map */
+.map-section {
+  background: var(--dark);
+  color: white;
+  padding: 55px 0;
+}
+
+.map-section h2 {
+  color: white;
+}
+
+.map-section .section-title span {
+  color: #c5e6b5;
+}
+
+.map-section p {
+  color: #e0eae2;
+}
+
+.map-frame {
+  width: 100%;
+  height: 620px;
+  border: 0;
+  border-radius: 12px;
+  background: white;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #d3edc5;
+  font-weight: bold;
+}
+
+/* Closing section */
+.closing {
+  background: #e6efe0;
+  padding: 35px;
+  border-radius: 15px;
+  margin: 55px auto;
+}
+
+/* Footer */
+footer {
+  background: #0c2c23;
+  color: white;
+  padding: 45px 6% 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 35px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+footer h3 {
+  margin-bottom: 15px;
+  color: #d1e9c7;
+}
+
+footer p,
+footer li {
+  color: #d0ddd4;
+  font-size: 14px;
+}
+
+footer ul {
+  padding-left: 20px;
+}
+
+footer a {
+  color: #d1e9c7;
+  overflow-wrap: anywhere;
+}
+
+.copyright {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid #426054;
+  font-size: 12px;
+  color: #b9cbbf;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 850px) {
+  .overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .geo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  header {
+    padding: 16px 5%;
+  }
+
+  nav {
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 60px 6%;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .overview,
+  .geo-grid,
+  .gallery,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery figure {
+    height: 230px;
+  }
+
+  .map-frame {
+    height: 450px;
+  }
+
+  .intro-image {
+    height: 260px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<header>
+  <div class="logo">
+    KAVILUMPARA
+    <span>GRAMА PANCHAYAT WEBGIS</span>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#geography">Geography</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#map">WebGIS Map</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="tag">Kozhikode District · Kerala, India</div>
+    <h1>Explore Kavilumpara Through Maps</h1>
+    <p>
+      Discover the geographical features, landscapes, agricultural
+      areas and spatial information of Kavilumpara Grama Panchayat
+      through an interactive WebGIS platform.
+    </p>
+    <a href="#map" class="button">Explore Interactive Map ↗</a>
+    <a href="#about" class="button">Discover Kavilumpara</a>
+  </div>
+</section>
+
+<main class="container">
+
+<!-- Overview -->
+<div class="overview">
+  <div class="overview-card">
+    <h3>Kerala</h3>
+    <p>State</p>
+  </div>
+  <div class="overview-card">
+    <h3>Kozhikode</h3>
+    <p>District</p>
+  </div>
+  <div class="overview-card">
+    <h3>Kunnummal</h3>
+    <p>Block Panchayat</p>
+  </div>
+  <div class="overview-card">
+    <h3>Rural</h3>
+    <p>Local Government</p>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="section-title">
+    <span>Introduction</span>
+    <h2>About Kavilumpara Grama Panchayat</h2>
+  </div>
+
+  <div class="intro-grid">
+    <div>
+      <p>
+        Kavilumpara Grama Panchayat is located in Kozhikode district
+        in the northern part of Kerala, India. It is a rural area
+        characterised by green landscapes, agricultural activities,
+        settlements and hilly terrain associated with the Western
+        Ghats region.
+      </p>
+
+      <p>
+        Agriculture forms an important part of the local economy.
+        Plantation crops, rural settlements and transport routes
+        contribute to the geographical and socioeconomic character
+        of the area.
+      </p>
+
+      <p>
+        The region's connection to the Kuttiady Ghat route provides
+        access towards the Wayanad highlands. Its terrain, rainfall
+        and drainage patterns are important considerations for
+        transportation, environmental conservation and disaster
+        management.
+      </p>
+
+      <p>
+        This WebGIS website provides a digital platform to explore
+        local geography and understand the relationship between
+        natural resources, human activities and spatial development.
+      </p>
+    </div>
+
+    <img
+      class="intro-image"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBWFMPkR9E6-KUChy-sgb0PoZvR4f77dEDB8f4rt5ry9B6iTQnkkT3F3U&s=10"
+      alt="Lush green forest landscape">
+  </div>
+</section>
+
+<!-- Geography -->
+<section class="geography" id="geography">
+  <div class="container">
+    <div class="section-title">
+      <span>Geographical Profile</span>
+      <h2>Geography and Natural Environment</h2>
+      <p>
+        Explore the major geographical characteristics of
+        Kavilumpara and its surrounding region.
+      </p>
+    </div>
+
+    <div class="geo-grid">
+      <article class="geo-card">
+        <div class="icon">📍</div>
+        <h3>Geographical Location</h3>
+        <p>
+          Kavilumpara is situated in Kozhikode district, Kerala.
+          It is associated with Kunnummal Block Panchayat and the
+          Vatakara taluk area.
+        </p>
+      </article>
+
+      <article class="geo-card">
+        <div class="icon">⛰️</div>
+        <h3>Relief and Topography</h3>
+        <p>
+          The wider region includes undulating and hilly terrain
+          towards the Western Ghats. Relief influences settlement
+          patterns, transport and surface drainage.
+        </p>
+      </article>
+
+      <article class="geo-card">
+        <div class="icon">🌳</div>
+        <h3>Forest and Biodiversity</h3>
+        <p>
+          Green cover and forested landscapes form an important
+          part of the surrounding environment. Conservation helps
+          protect biodiversity and natural resources.
+        </p>
+      </article>
+
+      <article class="geo-card">
+        <div class="icon">🌧️</div>
+        <h3>Climate and Rainfall</h3>
+        <p>
+          The region experiences a tropical monsoon-influenced
+          climate. Seasonal rainfall affects agriculture, streams,
+          slope stability and drainage.
+        </p>
+      </article>
+
+      <article class="geo-card">
+        <div class="icon">🌱</div>
+        <h3>Agriculture and Land Use</h3>
+        <p>
+          Agriculture is an important rural activity. Rubber,
+          coconut and other crops contribute to the agricultural
+          landscape of the region.
+        </p>
+      </article>
+
+      <article class="geo-card">
+        <div class="icon">🛣️</div>
+        <h3>Transport and Connectivity</h3>
+        <p>
+          The Kuttiady Ghat route connects this part of Kozhikode
+          district with the Wayanad highlands. Hilly roads require
+          attention to slope conditions and safe accessibility.
+        </p>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> The geographical information above is
+      a general regional description. Verify exact area, coordinates,
+      elevation, ward boundaries, population and other statistics
+      from official government records before using them in academic
+      or administrative reports.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Interactive WebGIS -->
+<section class="map-section" id="map">
+  <div class="container">
+    <div class="section-title">
+      <span>Explore Spatial Data</span>
+      <h2>Interactive Kavilumpara WebGIS Map</h2>
+      <p>
+        Explore the interactive mapping platform below. Use the
+        available map tools to zoom, pan and view the spatial
+        information provided by the WebGIS application.
+      </p>
+    </div>
+
+    <iframe
+      class="map-frame"
+      src="https://praveenarjun433-sys.github.io/Webgis-kavilumpara/"
+      title="Interactive WebGIS map of Kavilumpara Grama Panchayat"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+
+    <p>
+      If the map does not appear, open it directly using the link below.
+    </p>
+
+    <a
+      class="map-link"
+      href="https://praveenarjun433-sys.github.io/Webgis-kavilumpara/"
+      target="_blank"
+      rel="noopener noreferrer">
+      Open Interactive WebGIS in a New Tab ↗
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-grid">
+
+    <div>
+      <h3>Kavilumpara Grama Panchayat</h3>
+      <p>
+        An interactive geographical information website dedicated
+        to exploring the landscapes and spatial features of
+        Kavilumpara, Kozhikode district, Kerala.
+      </p>
+    </div>
+
+    <div>
+      <h3>Project Contact</h3>
+      <p><strong>Name:</strong> Arjun P.T</p>
+      <p>
+        <strong>Email:</strong>
+        <a href="mailto:praveenarjun433@gmail.com">
+          praveenarjun433@gmail.com
+        </a>
+      </p>
+    </div>
+
+    <div>
+      <h3>Useful Links</h3>
+      <ul>
+        <li>
+          <a
+            href="https://praveenarjun433-sys.github.io/Webgis-kavilumpara/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Interactive WebGIS Map
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://kozhikode.nic.in/en/about-district/adminstration/panchayaths/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Kozhikode District Panchayat Directory
+          </a>
+        </li>
+
+        
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    <p>
+      &copy; <span id="year"></span>
+      Kavilumpara Grama Panchayat WebGIS.
+      Created for geographical learning and awareness.
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>
